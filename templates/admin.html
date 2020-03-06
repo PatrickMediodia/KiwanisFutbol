@@ -90,18 +90,29 @@
 </header>
 
 <script>
+  
+</script>
+
+<script>
+  
+</script>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $(document).ready(function () {
+    $('#datatable').DataTable();
+    console.log("datatable created")
+  });
   function displayRegisterModal() {
     $('#createTheModal').modal('show').find('.modal-content').load("/admin/registerteam");
   }
   function alertMsg() {
     alert("Record has been Deleted");
   }
+  
 </script>
 
 {% endblock %}
 
-<script>
-  $(document).ready(function () {
-    $('#datatable').DataTable();
-  });
-</script>
