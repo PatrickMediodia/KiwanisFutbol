@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Kiwanis Futbol</title>
+{% endblock %}
+
+{% block body %}
+<div class="intro-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="brand-heading">kiwanis futbol festival 2020</h1>
+                <p class="intro-text">May 16,2020</p>
+            </div>
+        </div>
+    </div>
+</div>
+</header>
+
+<section class="bg-primary content-section text-center" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2 style="color: darkblue;">About Kiwanis Futbol</h2>
+                <p style="color: darkblue;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac
+                    aliquet magna, eget euismod
+                    nibh. Morbi varius nulla nulla, in ultricies quam semper non. Nulla facilisi. Nam rutrum cursus
+                    elit, quis congue enim facilisis eget. Sed sit amet venenatis diam, et semper mauris. Donec ut
+                    sem a turpis rutrum elementum ut id ex. Nulla accumsan, quam sit amet malesuada posuere, justo
+                    leo efficitur nunc, eget bibendum nibh libero vel ipsum. Mauris accumsan lectus risus,
+                    consectetur aliquet lacus pretium eget. Nunc ante dolor, aliquam ut tellus eu, faucibus suscipit
+                    tortor. Aenean imperdiet mi convallis dignissim bibendum. In ac augue libero. Suspendisse vel
+                    magna tristique, semper diam eget, consequat leo. Integer ornare sem nec dui tincidunt, in
+                    blandit metus sollicitudin.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="bg-info content-section text-center" id="register">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2>Registered Teams</h2>
+                <p>Grayscale is a free Bootstrap theme. It can be yours right now, simply download the template
+                    on&nbsp;<a href="#">the preview page</a>. The theme is open source, and you can use it for any
+                    purpose, personal or commercial.</p>
+                <p>This theme features stock photos by&nbsp;<a href="#">Gratisography</a>&nbsp;along with a custom
+                    Google Maps skin courtesy of&nbsp;<a href="#">Snazzy Maps</a>.</p>
+                <p>Grayscale includes full HTML, CSS, and custom JavaScript files along with SASS and LESS files for
+                    easy customization!</p>
+                <button type="button" style="display: inline;" class="btn btn-secondary createModal"
+                    onclick="displayModal();">- Register Here -</button>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="bg-dark content-section text-center" id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2>Contact Us</h2>
+                <p>For any inquiries and suggestions.<br>Feel free to contact us through our social media links
+                    below!</p>
+                <ul class="list-inline banner-social-buttons">
+                    <li class="list-inline-item"><button class="btn btn-primary btn-lg btn-default" type="button"><i class="fa fa-facebook fa-fw"></i><span class="network-name" onclick="window.open('https://www.facebook.com/Kiwanis-Futbol-Festival-104778151139489/ ','_blank')"> Facebook</span></button></li>
+                    <li class="list-inline-item"><button class="btn btn-primary btn-lg btn-default" type="button"><i class="fa fa-instagram fa-fw"></i><span class="network-name" onclick="window.open('https://www.facebook.com/Kiwanis-Futbol-Festival-104778151139489/ ','_blank')">Instagram</span></button></li>
+                </ul>
+                <p><br>Gmail: kiwanisfutbol@gmail.com</p>
+                <p>Contact Number:<br>(0919)004-1631 Smart<br>(0915)646-1457 Globe</p>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="map-clean"></div>
+
+<script>
+    function displayModal() {
+        $('#editTheModal').modal('show').find('.modal-content').load("/register");
+    }
+</script>
+
+<div class="editTheModal">
+    <div id="editTheModal" class="modal fade text-center">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
