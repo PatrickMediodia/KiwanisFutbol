@@ -15,10 +15,14 @@ class registered(db.Model):
 
     def __repr__(self):
         return str(self.id)
-
+    
 @app.route("/")
 def index():
-    return render_template('index.html')
+    try:
+        reg = registered.query.order_by(registered.date_registered).all()
+        return render_template('index.html', reg = reg)
+    except:
+        return render_template('index.html')
     
 @app.route("/register")
 def register():

@@ -7,7 +7,7 @@
 {% block body %}
 <div class="intro-body">
   <div class="d-flex justify-content-center">
-    <div class="jumbotron col-lg-10">
+    <div class="jumbotron col-lg-10" style="margin-top: 60px; padding-top: 50px; padding-bottom: 50px;">
       <div class="container">
         <h2 style="color: black;">Registered Teams</h2>
       </div>
@@ -48,27 +48,21 @@
                 {{ item.date_registered.date() }}
               </td>
               <td>
-                <button type="button" style="display: inline;" class="btn btn-success"onclick="displayEditModal();">Edit</button> 
-                <a class="btn btn-danger" href='/admin/delete/{{item.id}}' onclick="alertMsg()">Delete</a>
+                <button type="button" style="display: inline;" class="btn btn-success"
+                  onclick="displayEditModal();">Edit</button>
                 <script>
                   function displayEditModal() {
                     $('#editTheModal').modal('show').find('.modal-content').load("/admin/edit/{{item.id}}");
                   }
                 </script>
-                <div class="editTheModal">
-                  <div id="editTheModal" class="modal fade text-center">
-                    <div class="modal-dialog modal-xl modal-dialog-centered">
-                      <div class="modal-content">
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <a class="btn btn-danger" href='/admin/delete/{{item.id}}' onclick="alertMsg()">Delete</a>
               </td>
             </tr>
             {% endfor%}
           </tbody>
         </table>
       </div>
+
       <div class=" createTheModal">
         <div id="createTheModal" class="modal fade text-center">
           <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -77,8 +71,16 @@
           </div>
         </div>
       </div>
+      <div class="editTheModal">
+        <div id="editTheModal" class="modal fade text-center">
+          <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="form-group">
-        <div class="col-md-12" style="padding-top: 10px;">
+        <div class="col-md-12" style="padding-top: 20px;">
           <button type="button" style="display: inline;" class="btn btn-primary float-right"
             onclick="displayRegisterModal();">Register Team</button>
         </div>
@@ -89,21 +91,14 @@
 </div>
 </header>
 
-<script>
-  
-</script>
-
-<script>
-  
-</script>
-
 {% endblock %}
 
 {% block scripts %}
 <script>
-  $(document).ready(function () {
-    $('#datatable').DataTable();
-    console.log("datatable created")
+  $('#datatable').DataTable({
+    scrollY: 400,
+    scrollCollapse: true,
+    paging: false,
   });
   function displayRegisterModal() {
     $('#createTheModal').modal('show').find('.modal-content').load("/admin/registerteam");
@@ -111,8 +106,6 @@
   function alertMsg() {
     alert("Record has been Deleted");
   }
-  
 </script>
 
 {% endblock %}
-
