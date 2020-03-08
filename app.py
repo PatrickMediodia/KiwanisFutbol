@@ -40,7 +40,7 @@ def admin():
         return redirect("/admin")
     else:
         try:
-            reg = registered.query.order_by(registered.date_registered).all() 
+            reg = registered.query.all() 
             return render_template('admin.html', reg = reg)
         except:
             return render_template('admin.html') 
