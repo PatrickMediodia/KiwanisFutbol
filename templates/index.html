@@ -38,74 +38,40 @@
     </div>
 </section>
 <section class="bg-info content-section text-center" id="register">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 mx-auto">
-                <h2>Registered Teams</h2>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="jumbotron col-lg-12" style="padding-top: 30px; padding-bottom: 30px;">
-                            <h6 style="color: black; margin-top: 0  px; margin-bottom: 0px;">Under 9</h6><hr>
-                            {% for item in reg %}
-                                {% if item.ageGroup == 'Under 9' %}
-                                    <p style="color: black; margin-top: 0  px; margin-bottom: 2px;">{{ item.team_name }}</p>
-                                {% else %}    
-                                {% endif %}    
-                            {% endfor %}
+    <div class="container-fluid">
+        <div class="col-lg-12 mx-auto">
+            <h2>Registered Teams</h2>
+            <div class="accordion" id="accordionExample">
+                <div class="row">
+                    {% for item in listAll %}
+                    <div class="col-lg-4">
+                        {% for agegroup in item %}
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        {{ agegroup }}
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <div class="card-body">
+                                    {% for register in reg %}
+                                    {% if register.ageGroup == agegroup %}
+                                    <p style="color: black; margin-top: 0  px; margin-bottom: 2px;"> {{ register.team_name }}</p>
+                                    {% else %}
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </div>
+                        {% endfor %}
                     </div>
-                        <div class="col-lg-4">
-                            <div class="jumbotron col-lg-12" style="padding-top: 30px; padding-bottom: 30px;">
-                                <h6 style="color: black; margin-top: 0  px; margin-bottom: 0px;">Under 11</h6><hr>
-                                {% for item in reg %}
-                                    {% if item.ageGroup == 'Under 11' %}
-                                        <p style="color: black; margin-top: 0  px; margin-bottom: 2px;">{{ item.team_name }}</p>
-                                    {% else %}    
-                                    {% endif %}    
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="jumbotron col-lg-12" style="padding-top: 30px; padding-bottom: 30px;">
-                                <h6 style="color: black; margin-top: 0  px; margin-bottom: 0px;">Under 13</h6><hr>
-                                {% for item in reg %}
-                                    {% if item.ageGroup == 'Under 13' %}
-                                        <p style="color: black; margin-top: 0  px; margin-bottom: 2px;">{{ item.team_name }}</p>
-                                    {% else %}    
-                                    {% endif %}    
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row equal-height">
-                        <div class="col-md-6">
-                            <div class="jumbotron col-lg-12" style="padding-top: 30px; padding-bottom: 30px;">
-                                <h6 style="color: black; margin-top: 0  px; margin-bottom: 0px;">Under 15</h6><hr>
-                                {% for item in reg %}
-                                    {% if item.ageGroup == 'Under 15' %}
-                                        <p style="color: black; margin-top: 0  px; margin-bottom: 2px;">{{ item.team_name }}</p>
-                                    {% else %}    
-                                    {% endif %}    
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="jumbotron col-lg-12" style="padding-top: 30px; padding-bottom: 30px;">
-                                <h6 style="color: black; margin-top: 0  px; margin-bottom: 0px;">Under 19</h6><hr>
-                                {% for item in reg %}
-                                    {% if item.ageGroup == 'Under 19' %}
-                                        <p style="color: black; margin-top: 0  px; margin-bottom: 2px;">{{ item.team_name }}</p>
-                                    {% else %}    
-                                    {% endif %}    
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" style="display: inline;" class="btn btn-secondary createModal"
-                    onclick="displayModal();">-- Register Here --</button>
+                    {% endfor %}
                 </div>
-                </div>
+            </div>
+            <button type="button" style="display: inline; margin-top: 30px;" class="btn btn-secondary createModal" onclick="displayModal();">-- Register Here --</button>
         </div>
     </div>
 </section>
@@ -122,8 +88,7 @@
                                 onclick="window.open('https://www.facebook.com/Kiwanis-Futbol-Festival-104778151139489/ ','_blank')"> Facebook</span></button>
                     </li>
                     <li class="list-inline-item"><button class="btn btn-primary btn-lg btn-default" type="button"><i
-                                class="fa fa-instagram fa-fw"></i><span class="network-name"
-                                onclick="window.open('https://www.facebook.com/Kiwanis-Futbol-Festival-104778151139489/ ','_blank')">Instagram</span></button>
+                                class="fa fa-instagram fa-fw"></i><span class="network-name">Instagram</span></button>
                     </li>
                 </ul>
                 <p><br>Gmail: kiwanisfutbol@gmail.com</p>

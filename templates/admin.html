@@ -7,7 +7,7 @@
 {% block body %}
 <div class="intro-body">
   <div class="d-flex justify-content-center">
-    <div class="jumbotron col-lg-10" style="margin-top: 60px; padding-top: 50px; padding-bottom: 50px;">
+    <div class="jumbotron col-lg-10" style="margin-top: 80px; padding-top: 40px; padding-bottom: 50px;">
       <div class="container">
         <h2 style="color: black;">Registered Teams</h2>
       </div>
@@ -49,11 +49,8 @@
               </td>
               <td>
                 <button type="button" style="display: inline;" class="btn btn-success"
-                  onclick="displayEditModal();">Edit</button>
+                  onclick="displayEditModal({{item.id}});">Edit</button>
                 <script>
-                  function displayEditModal() {
-                    $('#editTheModal').modal('show').find('.modal-content').load("/admin/edit/{{item.id}}");
-                  }
                 </script>
                 <a class="btn btn-danger" href='/admin/delete/{{item.id}}' onclick="alertMsg()">Delete</a>
               </td>
@@ -105,6 +102,9 @@
   }
   function alertMsg() {
     alert("Record has been Deleted");
+  }
+  function displayEditModal(id) {
+    $('#editTheModal').modal('show').find('.modal-content').load("/admin/edit/" + id);
   }
 </script>
 
