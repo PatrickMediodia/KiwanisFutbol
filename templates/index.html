@@ -9,37 +9,32 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <h1 class="brand-heading">kiwanis futbol festival 2020</h1>
-                <p class="intro-text">May 16,2020</p>
+                <h1 class="brand-heading">Kiwanis futbol festival 2020</h1>
+                <p class="intro-text" style="color: white;">Santa Cruz Sports Complex<br>May 16,2020</p>
             </div>
         </div>
     </div>
 </div>
 </header>
 
-<section class="bg-primary content-section text-center" id="about">
+<section class="content-section text-center" id="about" style="background-color:    #B49759;">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <h2 style="color: darkblue;">About Kiwanis Futbol</h2>
-                <p style="color: darkblue;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac
-                    aliquet magna, eget euismod
-                    nibh. Morbi varius nulla nulla, in ultricies quam semper non. Nulla facilisi. Nam rutrum cursus
-                    elit, quis congue enim facilisis eget. Sed sit amet venenatis diam, et semper mauris. Donec ut
-                    sem a turpis rutrum elementum ut id ex. Nulla accumsan, quam sit amet malesuada posuere, justo
-                    leo efficitur nunc, eget bibendum nibh libero vel ipsum. Mauris accumsan lectus risus,
-                    consectetur aliquet lacus pretium eget. Nunc ante dolor, aliquam ut tellus eu, faucibus suscipit
-                    tortor. Aenean imperdiet mi convallis dignissim bibendum. In ac augue libero. Suspendisse vel
-                    magna tristique, semper diam eget, consequat leo. Integer ornare sem nec dui tincidunt, in
-                    blandit metus sollicitudin.
-                </p>
+                <img src="/static/img/logo_kiwanis_horizontal_blue_rgb.png" class="img-fluid" alt="Responsive image" style="padding-bottom: 25px;">
+                <div class="iframe-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/_am40nXNtEU" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
             </div>
         </div>
     </div>
 </section>
-<section class="bg-info content-section text-center" id="register">
+<section class="content-section text-center" id="register" style="background-color: #99CAEA;">
     <div class="container-fluid">
         <div class="col-lg-12 mx-auto">
+            {% set count = namespace(value=0) %}
             <h2>Registered Teams</h2>
             <div class="accordion" id="accordionExample">
                 <div class="row">
@@ -49,38 +44,43 @@
                         <div class="card">
                             <div class="card-header" id="headingOne">
                                 <h2 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <button style="color: black;" class="btn btn-link" type="button"
+                                        data-toggle="collapse" data-target="#{{ listShort[count.value] }}"
+                                        aria-expanded="true" aria-controls="collapseOne">
                                         {{ agegroup }}
                                     </button>
                                 </h2>
                             </div>
-                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                            <div id="{{ listShort[count.value] }}" class="collapse" aria-labelledby="headingOne"
                                 data-parent="#accordionExample">
                                 <div class="card-body">
                                     {% for register in reg %}
                                     {% if register.ageGroup == agegroup %}
-                                    <p style="color: black; margin-top: 0  px; margin-bottom: 2px;"> {{ register.team_name }}</p>
+                                    <p style="margin-top: 0  px; margin-bottom: 2px;"> {{ register.team_name }}</p>
                                     {% else %}
                                     {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
+                            {% set count.value = count.value + 1 %}
                         </div>
                         {% endfor %}
                     </div>
                     {% endfor %}
                 </div>
-            </div>
-            <button type="button" style="display: inline; margin-top: 30px;" class="btn btn-secondary createModal" onclick="displayModal();">-- Register Here --</button>
+            </div>  
+            <button type="button" style="margin-top: 30px; display: inline; " class="btn btn-secondary createModal"
+                onclick="displayModal();">-- Register Here --</button>
         </div>
     </div>
 </section>
-<section class="bg-dark content-section text-center" id="contact">
+<section class="content-section text-center" id="contact" style="background-color: #003874;">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <h2>Contact Us</h2>
-                <p>For any inquiries and suggestions.<br>Feel free to contact us through our social media links
+                <p style="color: white;">For any inquiries and suggestions.<br>Feel free to contact us through our
+                    social media links
                     below!</p>
                 <ul class="list-inline banner-social-buttons">
                     <li class="list-inline-item"><button class="btn btn-primary btn-lg btn-default" type="button"><i
@@ -91,8 +91,8 @@
                                 class="fa fa-instagram fa-fw"></i><span class="network-name">Instagram</span></button>
                     </li>
                 </ul>
-                <p><br>Gmail: kiwanisfutbol@gmail.com</p>
-                <p>Contact Numbers:<br>(0919)004-1631 Smart<br>(0915)646-1457 Globe</p>
+                <p style="color: white;"><br>Gmail: kiwanisfutbol@gmail.com</p>
+                <p style="color:white">Contact Numbers:<br>(0919)004-1631 Smart<br>(0915)646-1457 Globe</p>
             </div>
         </div>
     </div>

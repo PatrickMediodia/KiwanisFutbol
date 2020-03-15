@@ -7,9 +7,10 @@ from werkzeug.security import generate_password_hash
 @app.route("/")
 def index():
     try:
+        listShort = [ 'u9' , 'u11','u13Boys','u13Girls','u15Boys','u15Girls','u19Boys','u19Girls','Women']
         listAll = [['Under 9 Mixed' , 'Under 11 Mixed', 'Under 13 Boys'], ['Under 13 Girls' , 'Under 15 Boys', 'Under 15 Girls'],['Under 19 Boys' , 'Under 19 Girls', "Women's Open"]]
         reg = Registered.query.order_by(Registered.date_registered).all()
-        return render_template('index.html', reg = reg , listAll = listAll)
+        return render_template('index.html', reg = reg , listAll = listAll , listShort = listShort)
     except:
         return render_template('index.html')
     
