@@ -1,0 +1,42 @@
+{% extends 'baseAdmin.html' %}
+
+{% block head %}
+<title>Kiwanis Futbol Login</title>
+{% endblock %}
+
+{% include 'navbarLogin.html' %} 
+
+{% block body %}
+<header class="masthead" style="background-image:url('/static/img/main.jpg');">
+<div class="intro-body">
+  <div class="container">
+  <div class="d-flex justify-content-center">
+      <div class="jumbotron col-xl-6 col-lg-4 col-md-6 col-xs-6">
+        <h2 style="color:black;">Login</h2>
+        <form action='/login' method="POST">
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          <small style="color: black;">{{ messages[0] }}</small><br><br>
+          {% endif %}
+          {% endwith %}
+          <div class="form-group">
+            <label for="text" style="color: black;">Username</label>
+            <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp"
+              placeholder="Enter Username">
+          </div>
+          <div class="form-group">
+            <label for="password" style="color:black;">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

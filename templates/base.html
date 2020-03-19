@@ -30,13 +30,14 @@
             </div>
         </div>
     </nav>
+
     {% block head %}
     {% endblock %}
+    
 </head>
 
 <body id="page-top">
     <header class="masthead" style="background-image:url('/static/img/main.jpg');">
-        
     {% block body %}
     {% endblock %}
     
@@ -46,13 +47,17 @@
         </div>
     </footer>
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="/static/js/grayscale.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/rowreorder/1.2.6/js/dataTables.rowReorder.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
     {% block scripts %}
     {% endblock %}
+
 </body>
 
 </html>

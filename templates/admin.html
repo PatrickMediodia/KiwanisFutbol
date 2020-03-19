@@ -1,111 +1,97 @@
-{% extends 'base.html' %}
+{% extends 'baseAdmin.html' %}
 
 {% block head %}
 <title>Kiwanis Futbol Admin</title>
 {% endblock %}
 
-{% block body %}
-<div class="intro-body">
-  <div class="d-flex justify-content-center">
-    <div class="jumbotron col-lg-10" style="margin-top: 80px; padding-top: 40px; padding-bottom: 50px;">
-      <div class="container">
-        <h2>Registered Teams</h2>
-      </div>
-      <div class="p-3 bg-light">
-        <table class="table" id="datatable">
-          <thead>
-            <tr>
-              <th>
-                Team Name
-              </th>
-              <th>
-                Age Group
-              </th>
-              <th>
-                Email
-              </th>
-              <th>
-                Date Registered
-              </th>
-              <th>
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for item in reg %}
-            <tr>
-              <td>
-                {{ item.team_name }}
-              </td>
-              <td>
-                {{ item.ageGroup }}
-              </td>
-              <td>
-                {{ item.email }}
-              </td>
-              <td>
-                {{ item.date_registered.date() }}
-              </td>
-              <td>
-                <button type="button" style="display: inline;" class="btn btn-success"
-                  onclick="displayEditModal({{item.id}});">Edit</button>
-                <script>
-                </script>
-                <a class="btn btn-danger" href='/admin/delete/{{item.id}}' onclick="alertMsg()">Delete</a>
-              </td>
-            </tr>
-            {% endfor%}
-          </tbody>
-        </table>
-      </div>
+{% include 'navbarAdmin.html' %}
 
-      <div class=" createTheModal">
-        <div id="createTheModal" class="modal fade text-center">
-          <div class="modal-dialog modal-xl modal-dialog-centered">
-            <div class="modal-content">
-            </div>
-          </div>
+{% block body %}
+    <div class="d-flex justify-content-center">
+      <div class="col-lg-10 col-md-10 col-xs-10" style="padding-top: 90px;">
+        <div class="p-3 bg-light">
+          <table class="table" id="datatable">
+            <thead>
+              <tr>
+                <th>
+                  Team Name : 
+                </th>
+                <th>
+                  Age Group :
+                </th>
+                <th>
+                  Email : 
+                </th>
+                <th>
+                  Date Registered : 
+                </th>
+                <th>
+                  Action : 
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in reg %}
+              <tr>
+                <td>
+                  {{ item.team_name }}
+                </td>
+                <td>
+                  {{ item.ageGroup }}
+                </td>
+                <td>
+                  {{ item.email }}
+                </td>
+                <td>
+                  {{ item.date_registered.date() }}
+                </td>
+                <td>
+                  <button type="button" style="display: inline;" class="btn btn-success"
+                    onclick="displayEditModal({{item.id}});">Edit</button>
+                  <a class="btn btn-danger" href='/admin/delete/{{item.id}}' onclick="alertMsg()">Delete</a>
+                </td>
+              </tr>
+              {% endfor%}
+            </tbody>
+          </table>
         </div>
-      </div>
-      <div class="editTheModal">
-        <div id="editTheModal" class="modal fade text-center">
-          <div class="modal-dialog modal-xl modal-dialog-centered">
-            <div class="modal-content">
-            </div>
+        <div class="form-group">
+          <div class="col-md-12" style="padding-top: 20px; padding-bottom: 50px;">
+            <button type="button" style="display: inline;" class="btn btn-primary float-right"
+              onclick="displayRegisterModal();">Register Team</button>
           </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-md-12" style="padding-top: 20px;">
-          <button type="button" style="display: inline;" class="btn btn-primary float-right"
-            onclick="displayRegisterModal();">Register Team</button>
         </div>
       </div>
     </div>
   </div>
-</div>
-</div>
-</header>
-
-{% endblock %}
-
-{% block scripts %}
-<script>
-  $('#datatable').DataTable({
-    scrollY: 400,
-    scrollCollapse: true,
-    paging: false,
-  });
-  function displayRegisterModal() {
-    $('#createTheModal').modal('show').find('.modal-content').load("/admin/registerteam");
-  }
-  function alertMsg() {
-    alert("Record has been Deleted");
-  }
-  function displayEditModal(id) {
-    $('#editTheModal').modal('show').find('.modal-content').load("/admin/edit/" + id);
-  }
-</script>
-
-{% endblock %}
+  <div class=" createTheModal">
+    <div id="createTheModal" class="modal fade text-center">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="editTheModal">
+    <div id="editTheModal" class="modal fade text-center">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $('#datatable').DataTable({
+      responsive: true
+    });
+    function displayRegisterModal() {
+      $('#createTheModal').modal('show').find('.modal-content').load("/admin/registerteam");
+    }
+    function alertMsg() {
+      alert("Record has been Deleted");
+    }
+    function displayEditModal(id) {
+      $('#editTheModal').modal('show').find('.modal-content').load("/admin/edit/" + id);
+    }
+  </script>
+  {% endblock %}

@@ -25,17 +25,20 @@
                 <option>Under 15 Girls</option>
                 <option>Under 19 Boys</option>
                 <option>Under 19 Girls</option>
-                <option>Women's Open</option>
+                <option>Womens Open</option>
             </select>
             <br>
             <hr>
             <div style="float:right">
-                <button type="submit" class="btn btn-primary">Post</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
-
         </form>
     </div>
+    <script>
+        document.getElementById("agegroup").value = "{{ reg.ageGroup }}";
+        console.log("{{ reg.ageGroup }}")
+    </script>
 </div>
 </div>
 </div>

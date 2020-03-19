@@ -7,26 +7,30 @@
     </div>
     <div class="modal-body">
         <form action='/admin/registerteam' method="POST">
-            <label for="teamname" style="float: left;">Enter Team Name:</label>
+            <label for="teamname" style="float: left; color: black;">Team Name:</label>
             <input class="form-control" type="text" name="teamname" id="teamname" placeholder="Enter Team Name Here"
                 aria-label="Enter Title Here">
             <br>
-            <label for="exampleInputEmail1">Email address</label>
+            <label for="email" style="float: left; color: black;">Email address:</label>
             <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter Email Here">
             <br>
-            <label for="agegroup" style="float: left;">State</label>
-            <select class="custom-select agegroup" id="agegroup" required name="agegroup">
+            <label for="agegroup" style="float: left; color: black;">Age Group:</label>
+            <select class="custom-select agegroup" id="ageGroup" required name="ageGroup">
                 <option selected disabled value="">Enter Age Group</option>
-                <option>Under 9</option>
-                <option>Under 11</option>
-                <option>Under 13</option>
-                <option>Under 15</option>
-                <option>Under 19</option>
+                <option>Under 9 Mixed</option>
+                <option>Under 11 Mixed</option>
+                <option>Under 13 Boys</option>
+                <option>Under 13 Girls</option>
+                <option>Under 15 Boys</option>
+                <option>Under 15 Girls</option>
+                <option>Under 19 Boys</option>
+                <option>Under 19 Girls</option>
+                <option>Womens Open</option>
             </select>
             <br>
             <hr>
             <div style="float:right">
-                <button type="submit" class="btn btn-primary">Post</button>
+                <button type="submit" class="btn btn-primary">Register</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
 

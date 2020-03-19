@@ -1,4 +1,4 @@
-from app import db
+from app import db , login_manager , app
 from flask_login import UserMixin , LoginManager
 from datetime import datetime
 
@@ -19,3 +19,9 @@ class Admin(UserMixin,db.Model):
 
     def __repr__(self):
         return str(self.id)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return Admin.query.get(int(user_id))
+
+
