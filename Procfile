@@ -1,3 +1,3 @@
 from app import app
 
-application = app
+web: gunicorn app
