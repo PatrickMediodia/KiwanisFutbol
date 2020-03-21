@@ -21,7 +21,7 @@
 <body class ="adminBG">
     <style>
         body {
-        background-image:url('/static/img/main.jpg');
+        background-image:url("{{ url_for('static',filename='img/main.jpg') }}");
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
