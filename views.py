@@ -1,4 +1,4 @@
-from app import db , app , login_manager , login_required , login_user , logout_user
+from app import db , app , login_manager , login_required , login_user , logout_user , mail , Message
 from flask import Flask, escape, request , render_template , request, redirect , flash
 from models import Registered,Admin
 from werkzeug.security import generate_password_hash , check_password_hash
@@ -11,13 +11,13 @@ def index():
         listShort = [ 'u9' , 'u11','u13Boys','u13Girls','u15Boys','u15Girls','u19Boys','u19Girls','Women']
         listAll = [['Under 9 Mixed' , 'Under 11 Mixed', 'Under 13 Boys'], ['Under 13 Girls' , 'Under 15 Boys', 'Under 15 Girls'],['Under 19 Boys' , 'Under 19 Girls', "Womens Open"]]
         reg = Registered.query.order_by(Registered.date_registered).all()
-        return render_template('index.html', reg = reg , listAll = listAll , listShort = listShort)
+        return render_template('/user/index.html', reg = reg , listAll = listAll , listShort = listShort)
     except:
-        return render_template('index.html')
+        return render_template('/user/index.html')
     
 @app.route("/register")
 def register():
-    return render_template('register.html')
+    return render_template('/user/egister.html')
 
 @app.route("/admin", methods = ['POST','GET'])
 @login_required
@@ -33,9 +33,9 @@ def admin():
     else:
         try:
             reg = Registered.query.all() 
-            return render_template('admin.html', reg = reg)
+            return render_template('/admin/admin.html', reg = reg)
         except:
-            return render_template('admin.html') 
+            return render_template('/admin/admin.html') 
 
 @app.route("/admin/registerteam", methods = ['POST','GET'])
 @login_required
@@ -47,9 +47,10 @@ def registerteam():
         new_reg = Registered(team_name = reg_teamname, ageGroup = reg_agegroup , email = reg_email)
         db.session.add(new_reg)
         db.session.commit()
+        send_Email(reg_teamname,None,reg_email,"Payment")
         return redirect("/admin")
     else:
-        return render_template('register_team.html')
+        return render_template('/admin/register_team.html')
 
 @app.route("/admin/delete/<int:id>")
 @login_required
@@ -70,7 +71,8 @@ def edit(id):
         db.session.commit()
         return redirect("/admin")   
     else:
-        return render_template('edit.html', reg = reg)
+        listAgeGroup = ['Under 9 Mixed' , 'Under 11 Mixed', 'Under 13 Boys','Under 13 Girls' , 'Under 15 Boys', 'Under 15 Girls','Under 19 Boys' , 'Under 19 Girls', "Womens Open"]
+        return render_template('/admin/edit.html', reg = reg , listAgeGroup = listAgeGroup , default = reg.ageGroup)
 
 @app.route("/login" , methods =  ['GET' , 'POST'])
 def login():
@@ -80,12 +82,15 @@ def login():
         if user: 
             if check_password_hash(user.password , password):
                 login_user(user)
-                return redirect("/admin") 
+                return redirect("/admin")
+            else:
+                flash('Invalid Username or Password.')
+                return redirect("/login")
         else:
             flash('Invalid Username or Password.')
-            return redirect("/admin") 
+            return redirect("/login") 
     else:
-        return render_template('login.html')
+        return render_template('/admin/login.html')
 
 @app.route('/logout')
 @login_required
@@ -94,7 +99,39 @@ def logout():
     flash('Logged out successfully.')
     return redirect('/login')
 
+@app.route("/admin/registrationEmail", methods = ['POST','GET'])
+@login_required
+def registration_Email():
+    if request.method == 'POST':
+        try:
+            reg_teamname = request.form['teamname']
+            reg_acceptDeny = request.form['acceptDeny']
+            reg_email = request.form['email']
+            send_Email(team_name,action,reg_email,"reg_email")
+            return redirect("/admin")
+        except:
+            return redirect("/admin")
+    else:
+        label = 'Registration Email'
+        return render_template('/admin/sendEmail.html', label = label)
+
+#Modify Email Contents
+def send_Email(team_name,action,email,emailType):
+    if emailType == "reg_email":
+        if action == 'Accept':
+            subjectHeader = 'Registration Accepted, Kiwanis Futbol Festival 2020'
+            msgBody = 'Your Registration to Kiwanis Futbol Festival 2020 with the team ' + team_name + ' was accepted. Please send your payment immediately so that you will be Officially Registered, Payment details can be seen in the website in the registration form. Thank you'
+        else:
+            subjectHeader = 'Registration Rejected, Kiwanis Futbol Festival 2020'
+            msgBody = 'Your Registration to Kiwanis Futbol Festival 2020 was Rejected, Reason: '    
+    else:
+        subjectHeader = 'Payment for Kiwanis Futbol Festival 2020 Recieved'
+        msgBody = 'Your Payment for Kiwanis Futbol Festival 2020 with the team ' + team_name + ' was accepted. Your team is now officially registered, you may verify in our website under the tab "Registered Teams". Thank you'
+    msg = Message(body = msgBody, sender='kiwanisfutbol@gmail.com',recipients=[email], subject= subjectHeader)
+    mail.send(msg)
+
 """
+#For creation of Admin Account
 @app.route("/signup" , methods =  ['GET' , 'POST'])
 def signup():
     password_hash = generate_password_hash('2020futbol' , method='sha256')
@@ -103,3 +140,5 @@ def signup():
     db.session.commit()
     return render_template('index.html')
 """
+
+    

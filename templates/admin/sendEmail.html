@@ -1,0 +1,34 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel" style="color: black;">{{ label }}</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form action='/admin/registrationEmail' method="POST">
+            <label for="teamname" style="float: left; color: black;">Team Name:</label>
+            <input class="form-control" type="text" name="teamname" id="teamname" placeholder="Enter Team Name Here"
+                aria-label="Enter Title Here">
+            <br>
+            <label for="email" style="float: left; color: black;">Email address: </label>
+            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter Email Here">
+            <br>
+            <label for="agegroup" style="float: left; color: black;">Action: </label>
+            <select class="custom-select agegroup" id="agegroup" required name="acceptDeny">
+                <option selected disabled value="">Accept or Deny Registration</option>
+                <option>Accept</option>
+                <option>Deny</option>
+            </select>
+            <br>
+            <hr>
+            <div style="float:right">
+                <button type="submit" class="btn btn-primary">Send</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+</div>
+</div>
