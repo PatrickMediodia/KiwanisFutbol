@@ -47,7 +47,7 @@ def registerteam():
         new_reg = Registered(team_name = reg_teamname, ageGroup = reg_agegroup , email = reg_email)
         db.session.add(new_reg)
         db.session.commit()
-        send_Email(reg_teamname,None,reg_email,"Payment")
+        send_Email(reg_teamname,None,reg_email,None,"Payment")
         return redirect("/admin")
     else:
         return render_template('/admin/register_team.html')
@@ -102,33 +102,38 @@ def logout():
 @app.route("/admin/registrationEmail", methods = ['POST','GET'])
 @login_required
 def registration_Email():
+    url = 'registrationEmail'
     if request.method == 'POST':
         try:
             reg_teamname = request.form['teamname']
             reg_acceptDeny = request.form['acceptDeny']
             reg_email = request.form['email']
-            send_Email(team_name,action,reg_email,"reg_email")
+            reg_notes = request.form['notes']
+            send_Email(reg_teamname,reg_acceptDeny,reg_email,reg_notes,"reg_email")
             return redirect("/admin")
         except:
             return redirect("/admin")
     else:
         label = 'Registration Email'
-        return render_template('/admin/sendEmail.html', label = label)
+        return render_template('/admin/sendEmail.html', label = label , url=url)
 
 #Modify Email Contents
-def send_Email(team_name,action,email,emailType):
-    if emailType == "reg_email":
-        if action == 'Accept':
-            subjectHeader = 'Registration Accepted, Kiwanis Futbol Festival 2020'
-            msgBody = 'Your Registration to Kiwanis Futbol Festival 2020 with the team ' + team_name + ' was accepted. Please send your payment immediately so that you will be Officially Registered, Payment details can be seen in the website in the registration form. Thank you'
+def send_Email(team_name,action,email,notes,emailType):
+    try:
+        if emailType == "reg_email":
+            if action == 'Accept':
+                subjectHeader = 'Registration Accepted, Kiwanis Futbol Festival 2020'
+                msgBody = f'Your Registration to Kiwanis Futbol Festival 2020 with the team { team_name } was accepted. Please send your payment immediately so that you will be Officially Registered. \n Payment details can be seen in the website in the registration form. \n {notes} \n Thank you'
+            else:
+                subjectHeader = 'Registration Rejected, Kiwanis Futbol Festival 2020'
+                msgBody = f'Your Registration to Kiwanis Futbol Festival 2020 was Rejected, \n Reason: { notes }'    
         else:
-            subjectHeader = 'Registration Rejected, Kiwanis Futbol Festival 2020'
-            msgBody = 'Your Registration to Kiwanis Futbol Festival 2020 was Rejected, Reason: '    
-    else:
-        subjectHeader = 'Payment for Kiwanis Futbol Festival 2020 Recieved'
-        msgBody = 'Your Payment for Kiwanis Futbol Festival 2020 with the team ' + team_name + ' was accepted. Your team is now officially registered, you may verify in our website under the tab "Registered Teams". Thank you'
-    msg = Message(body = msgBody, sender='kiwanisfutbol@gmail.com',recipients=[email], subject= subjectHeader)
-    mail.send(msg)
+            subjectHeader = 'Payment for Kiwanis Futbol Festival 2020 Recieved'
+            msgBody = f'Your Payment for Kiwanis Futbol Festival 2020 with the team { team_name } was accepted. \n Your team is now officially registered, you may verify in our website under the tab "Registered Teams". \n { notes} \n Thank you'
+        msg = Message(body = msgBody, sender='kiwanisfutbol@gmail.com',recipients=[email], subject= subjectHeader)
+        mail.send(msg)
+    except:
+        print('Error in sending Email')
 
 """
 #For creation of Admin Account

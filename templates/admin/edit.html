@@ -9,10 +9,10 @@
         <form action='/admin/edit/{{reg.id}}' method="POST">
             <label for="teamname" style="float: left; color: black;">Team Name:</label>
             <input class="form-control" type="text" name="teamname" id="teamname" placeholder="Enter Team Name Here"
-                aria-label="Enter Title Here" value="{{reg.team_name}}">
+                aria-label="Enter Title Here" value="{{reg.team_name}}" required>
             <br>
             <label for="email" style="float: left; color: black;">Email address: </label>
-            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter Email Here" value="{{reg.email}}">
+            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter Email Here" value="{{reg.email}}" required>
             <br>
             <label for="agegroup" style="float: left; color: black;">Enter Age Group:</label>
             <select class="custom-select agegroup" id="agegroup" required name="agegroup">
