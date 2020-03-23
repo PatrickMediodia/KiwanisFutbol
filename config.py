@@ -3,7 +3,7 @@ import os
 class config(object):
     DEBUG = False
     TESTING = False
-    SECRET_KEY = os.urandom(24)
+    SECRET_KEY = '\x07}\xe7Y0mH\xbe\x0f\x0e\x93\x82\xfaX$\xa8P\xab\x95\xb2U\xce\xddf'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///registered.db'
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 465
