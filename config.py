@@ -12,7 +12,7 @@ class config(object):
     MAIL_PASSWORD = 'ugctghcebxdnbiyx'
 
 class ProductionConfig(config):
-    DEBUG = True
+    pass
 
 class DevelopmentConfig(config):
     DEBUG = True
