@@ -1,4 +1,4 @@
-<div class="modal-content">
+<div class="modal-content" id="edit-content">
     <div class="modal-header">
         <h3 class="modal-title" id="exampleModalLabel" style="color: black;">Team Registration</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -35,11 +35,18 @@
             </div>
         </form>
         <script>
-            document.getElementById("agegroup").value = "{{ reg.ageGroup }}";
-            console.log("{{ reg.ageGroup }}")
+            function loadWebPage(ageGroup) {   
+                document.getElementById("agegroup").value = ageGroup;
+                console.log(ageGroup)
+            }
+            $(window).on('shown.bs.modal', function() {
+                loadWebPage("{{ reg.ageGroup}}");
+            });
+            $(window).on('hidden.bs.modal', function() {
+                $('#edit-content').remove();
+            });
         </script>
     </div>
-
 </div>
 </div>
 </div>
